@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node backend/index.js",
-    "dev":"nodemon backend/index.js"
+    "dev": "nodemon backend/index.js"
   },
   "keywords": [],
   "author": "",
@@ -23,5 +23,6 @@
     "mongoose": "^8.4.0",
     "nodemon": "^3.1.0",
     "passport": "^0.7.0"
-  }
+  },
+  "type": "module"
 }
