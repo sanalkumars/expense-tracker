@@ -6,7 +6,24 @@ mutation SignUp($input : SignUpInput!){
         _id
         name
         username
-
     }
 }
-`
+`;
+
+export const LOGIN = gql`
+mutation LoginIn($input : SignInInput!){
+    signIn(input:$input){
+        _id
+        name
+        username
+    }
+}
+`;
+
+export const LOGOUT = gql`
+mutation LogOut{
+    logout{
+        message
+    }
+}
+`;

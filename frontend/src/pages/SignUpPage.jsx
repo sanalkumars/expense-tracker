@@ -4,15 +4,32 @@ import RadioButton from "../components/RadioButton";
 import InputField from "../components/InputField";
 import { useMutation } from "@apollo/client";
 import { SIGN_UP } from "../graphql/mutations/user.mutation";
+import toast from 'react-hot-toast';
 
 const SignUpPage = () => {
-	const [ signup , loading , error ] = useMutation(SIGN_UP);
+	
 	const [signUpData, setSignUpData] = useState({
 		name: "",
 		username: "",
 		password: "",
 		gender: "",
 	});
+
+	const [ signup , {loading , error} ] = useMutation(SIGN_UP);
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			await signup({
+				variables:{
+					input: signUpData
+				}
+			})
+		} catch (error) {
+			console.log(error);
+			
+		}
+	};
 
 	const handleChange = (e) => {
 		const { name, value, type } = e.target;
@@ -30,10 +47,7 @@ const SignUpPage = () => {
 		}
 	};
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		console.log(signUpData);
-	};
+	
 
 	return (
 		<div className='h-screen flex justify-center items-center'>
@@ -95,6 +109,12 @@ const SignUpPage = () => {
 								>
 									{ loading? "Loading" : "SignUp"}
 								</button>
+
+								{
+									error && (
+										<p className="text-red-500 text-sm mt-2">{error.message}</p>
+									)
+								}
 							</div>
 						</form>
 						<div className='mt-4 text-sm text-gray-600 text-center'>
